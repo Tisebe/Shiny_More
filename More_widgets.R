@@ -41,7 +41,7 @@ fluidRow(
          h3('Help text'),
          helpText('Note:help text is not a true widget,',
                   'but it provides an easy way to add text to',
-                  'accompany other widgets.'))
+                  'accompany other widgets.')),
   column(3,
          numericInput('num',
                       h3('Numeric input'),
