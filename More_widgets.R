@@ -38,6 +38,11 @@ fluidRow(
   column(3,
          fileInput('file', h3('File input'))),
   column(3,
+         h3('Help text'),
+         helpText('Note:help text is not a true widget,',
+                  'but it provides an easy way to add text to',
+                  'accompany other widgets.'))
+  column(3,
          numericInput('num',
                       h3('Numeric input'),
                       value = 1))
