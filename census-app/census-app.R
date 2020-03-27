@@ -2,6 +2,13 @@ library(shiny)
 
 #Define UI
 
+library(maps)
+library(mapproj)
+
+source("C:/Users/Tony Isebe/Desktop/App-1/Shiny_More/census-app/helpers.R")
+counties <- readRDS("C:/Users/Tony Isebe/Desktop/App-1/Shiny_More/census-app/data/counties.rds")
+
+
 ui <- fluidPage(
   titlePanel('censusVis'),
   
@@ -24,26 +31,16 @@ ui <- fluidPage(
                   min = 0, max = 100, value = c(0,100))
       
     ),
-    mainPanel(
-      textOutput('selected_var'),
-      textOutput('min_max')
-    )
+    mainPanel(plotOutput("map"))
   )
 )
 
+# Server logic ----
 server <- function(input, output) {
-  output$selected_var <- renderText({
-    paste('You have selected', input$var)
-  }) 
-    output$min_max <- renderText({
-      paste('You have chosen a range that goes from',
-            input$range[1], 'to', input$range[2])
-    
+  output$map <- renderPlot({
+    percent_map(counties$white, 'darkgreen', '%White')
   })
-  
 }
 
-
-#Define App
-
-shinyApp(ui=ui, server = server)
+# Run app ----
+shinyApp(ui, server)
