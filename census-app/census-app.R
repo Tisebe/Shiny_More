@@ -38,7 +38,12 @@ ui <- fluidPage(
 # Server logic ----
 server <- function(input, output) {
   output$map <- renderPlot({
-    percent_map(counties$white, 'darkgreen', '%White')
+    data <- switch(input$var,
+                   'Percent White'=counties$white,
+                   'Percent Black'=counties$black,
+                   'Percent Hispanic'=counties$hispanic,
+                   'Percent Asian'=counties$asian)
+    percent_map(var = data, color ='blue', legend.title = 'US Census', max = 100, min = 0)
   })
 }
 
